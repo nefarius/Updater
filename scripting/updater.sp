@@ -6,11 +6,12 @@
 #include <cURL>
 #include <socket>
 #include <steamtools>
+#include <webternet>
 #define REQUIRE_EXTENSIONS
 
 /* Plugin Info */
 #define PLUGIN_NAME 		"Updater"
-#define PLUGIN_VERSION 		"1.2.0"
+#define PLUGIN_VERSION 		"1.3.0"
 
 public Plugin:myinfo =
 {
@@ -22,13 +23,14 @@ public Plugin:myinfo =
 };
 
 /* Globals */
-//#define DEBUG		// This will enable verbose logging. Useful for developers testing their updates.
+#define DEBUG		// This will enable verbose logging. Useful for developers testing their updates.
 
 #define CURL_AVAILABLE()		(GetFeatureStatus(FeatureType_Native, "curl_easy_init") == FeatureStatus_Available)
 #define SOCKET_AVAILABLE()		(GetFeatureStatus(FeatureType_Native, "SocketCreate") == FeatureStatus_Available)
 #define STEAMTOOLS_AVAILABLE()	(GetFeatureStatus(FeatureType_Native, "Steam_CreateHTTPRequest") == FeatureStatus_Available)
+#define WEBTERNET_AVAILABLE()	(GetFeatureStatus(FeatureType_Native, "HTTP_CreateSession") == FeatureStatus_Available)
 
-#define EXTENSION_ERROR		"This plugin requires either the cURL, Socket, or SteamTools extension to function."
+#define EXTENSION_ERROR		"This plugin requires either the Webternet, cURL, Socket, or SteamTools extension to function."
 #define TEMP_FILE_EXT		"temp"		// All files are downloaded with this extension first.
 #define MAX_URL_LENGTH		256
 

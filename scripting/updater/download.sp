@@ -4,6 +4,7 @@
 #include "updater/download_curl.sp"
 #include "updater/download_socket.sp"
 #include "updater/download_steamtools.sp"
+#include "updater/download_webternet.sp"
 
 FinalizeDownload(index)
 {
@@ -64,7 +65,10 @@ ProcessDownloadQueue(bool:force=false)
 	ReadPackString(hQueuePack, url, sizeof(url));
 	ReadPackString(hQueuePack, dest, sizeof(dest));
 	
-	if (!CURL_AVAILABLE() && !SOCKET_AVAILABLE() && !STEAMTOOLS_AVAILABLE())
+	if (!CURL_AVAILABLE() 
+		&& !SOCKET_AVAILABLE() 
+		&& !STEAMTOOLS_AVAILABLE() 
+		&& !WEBTERNET_AVAILABLE())
 	{
 		SetFailState(EXTENSION_ERROR);
 	}
@@ -77,7 +81,11 @@ ProcessDownloadQueue(bool:force=false)
 	
 	g_bDownloading = true;
 	
-	if (STEAMTOOLS_AVAILABLE())
+	if (WEBTERNET_AVAILABLE())
+	{
+		Download_Webternet(url, dest);
+	}
+	else if (STEAMTOOLS_AVAILABLE())
 	{
 		if (g_bSteamLoaded)
 		{
