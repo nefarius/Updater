@@ -1,3 +1,6 @@
+
+/* Extension Helper - Webternet */
+
 Download_Webternet(const String:url[], const String:dest[])
 {
 	new Handle:session = HTTP_CreateSession();
