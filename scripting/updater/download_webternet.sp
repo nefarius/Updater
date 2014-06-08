@@ -26,11 +26,11 @@ Download_Webternet(const String:url[], const String:dest[])
 	}
 }
 
-public OnWebternetComplete(Handle:session, status, Handle:downloader, any:data)
+public OnWebternetComplete(Handle:session, bool:succeeded, Handle:downloader, any:data)
 {
 	CloseHandle(downloader);
 
-	if (status == HTTP_OK)
+	if (succeeded)
 	{
 		DownloadEnded(true);
 	}
